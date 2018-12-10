@@ -5,7 +5,6 @@ const PieChart = require('./pieChart.js');
 
 const PortfolioListView= function (container) {
   this.container = container;
-  console.log("container", this.container);
 };
 
 PortfolioListView.prototype.bindEvents = function () {
@@ -22,7 +21,7 @@ PortfolioListView.prototype.render = function (shares) {
 };
 
 PortfolioListView.prototype.renderPieChart = function (shares) {
-  const dataForChart = ChartHelper(shares);
+  const dataForChart = new ChartHelper(shares);
   const chartContainer = document.createElement('div');
   chartContainer.className ='pie-chart';
   const pieChart = new PieChart('Stock value chart', dataForChart, chartContainer);

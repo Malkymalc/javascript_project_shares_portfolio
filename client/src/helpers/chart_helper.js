@@ -11,4 +11,6 @@ const ChartHelper = function(stocks) {
   return stockData;
 }
 
+
+
 module.exports = ChartHelper;

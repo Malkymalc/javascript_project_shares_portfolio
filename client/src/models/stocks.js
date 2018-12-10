@@ -47,5 +47,13 @@ Stocks.prototype.findID = function (share) {
   return shareID;
 };
 
+Stocks.prototype.historicData = function () {
+  const testRequest = new RequestHelper('https://api.iextrading.com/1.0/stock/epix/chart/1y');
+  testRequest.get()
+  .then((historicData) => {
+    PubSub.publish('Stocks:historic-data-loaded', historicData);
+  })
+  .catch(console.error);
+}
 
 module.exports = Stocks;

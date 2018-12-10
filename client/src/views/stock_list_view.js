@@ -3,7 +3,6 @@ const ListItemView = require('./list_item_view.js');
 
 const StockListView= function (container) {
   this.container = container;
-  console.log("container", this.container);
 };
 
 StockListView.prototype.bindEvents = function () {
