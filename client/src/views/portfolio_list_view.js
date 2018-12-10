@@ -24,7 +24,8 @@ PortfolioListView.prototype.render = function (shares) {
 PortfolioListView.prototype.renderPieChart = function (shares) {
   const dataForChart = ChartHelper(shares);
   const chartContainer = document.createElement('div');
-  const pieChart = new PieChart('PieChart', dataForChart, chartContainer);
+  chartContainer.className('pie-chart');
+  const pieChart = new PieChart('Stock value chart', dataForChart, chartContainer);
   this.container.appendChild(chartContainer);
 };
 
