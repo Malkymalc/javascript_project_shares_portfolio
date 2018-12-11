@@ -1,7 +1,7 @@
 const Highcharts = require('highcharts');
 
 const LineChart = function(title, name, data, container) {
-
+  const today = Date.now();
   const chart = new Highcharts.Chart({
     chart: {
       renderTo: container
@@ -26,16 +26,17 @@ const LineChart = function(title, name, data, container) {
         label: {
           connectorAllowed: false
         },
-        pointStart      : Date.UTC(2018, 0, 0),
-        pointInterval   : 24 * 3600 * 1000*30
+        pointStart      : today - 24 * 3600 * 1000 * 365, //Date.UTC(2018, 0, 0),
+        pointInterval   : 24 * 3600 * 1000 * 31,
+        pointEnd        :today
       }
     },
     xAxis      : {
-      min:Date.UTC(2018, 0, 0),
-      max:Date.UTC(2018, 11, 1),
+      min: today - 24 * 3600 * 1000 * 365, //Date.UTC(2018, 0, 0),
+      max:  today, //Date.UTC(2018, 12, 0),
       allowDecimals: false,
       type           : 'datetime',
-      tickInterval   : 24 * 3600 * 1000*30
+      //tickInterval   : 24 * 3600 * 1000*31
     }
   });
 
