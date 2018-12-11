@@ -11,11 +11,16 @@ const Stocks = function (url) {
 Stocks.prototype.bindEvents = function () {
   PubSub.subscribe('ListItemView:link-clicked', (event) => {
     this.getMoreInfoOnStock(event.detail)
-      .then((stock) => {
-        PubSub.publish('Stock:stock-info-loaded', stock);
-      })
-      .catch(console.error);
+    .then((stock) => {
+      PubSub.publish('Stock:stock-info-loaded', stock);
+    })
+    .catch(console.error);
   });
+
+  PubSub.subscribe('StockFormView:add-stock', (event) => {
+    const shareByID = this.findID(event.detail.symbol);
+    this.request.update(shareByID, event.detail.amount);
+  })
 };
 
 
@@ -47,12 +52,15 @@ Stocks.prototype.getMoreInfoOnStock = function (symbol) {
   return request.get();
 };
 
+
 Stocks.prototype.updatePortfolio = function () {
   this.stockData.forEach((share) => {
     const shareID = this.findID(share);
     this.request.update(shareID, share)
     .then((shares) => {
       PubSub.publish('Stocks:portfolio-data-loaded', shares);
+      //  PubSub.subscribe('StockFormView:add-stock', shares);
+      console.log(shares)
     })
     .catch(console.error);
   })

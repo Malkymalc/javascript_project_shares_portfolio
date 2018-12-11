@@ -20,7 +20,10 @@ ListItemView.prototype.renderPortfolio = function (share) {
 
   link.addEventListener('click', (event) => {
     event.preventDefault();
-    PubSub.publish('ListItemView:link-clicked', share.symbol);
+    const showStockDetailView = new ShowStockDetailView(this.container, share.symbol);
+    PubSub.publish('ListItemView:stock-symbol', share.symbol);
+    showStockDetailView.render();
+    console.log('ajnd', share.symbol);
   });
 
   const symbol = document.createElement('p');
@@ -54,7 +57,6 @@ ListItemView.prototype.renderPortfolio = function (share) {
 ListItemView.prototype.renderStockList = function (stocks) {
 
   const stockContainer = document.createElement('div');
-  stockContainer.className = 'stocks';
 
   const link = document.createElement('a');
   link.setAttribute("href", "");
@@ -65,11 +67,7 @@ ListItemView.prototype.renderStockList = function (stocks) {
   company.textContent = stocks.companyName;
   link.appendChild(name);
 
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
-    PubSub.publish('ListItemView:link-clicked', share.symbol);
-  });
-
+  stockContainer.className = 'stocks';
   const symbol = document.createElement('p');
   symbol.className = 'symbol';
   symbol.textContent = stocks.symbol;
