@@ -22,7 +22,7 @@ ListItemView.prototype.renderPortfolio = function (share) {
     event.preventDefault();
     const showStockDetailView = new ShowStockDetailView(this.container, share.symbol);
     PubSub.publish('ListItemView:stock-symbol', share.symbol);
-    showStockDetailView.render();
+    showStockDetailView.render(share);
     console.log('ajnd', share.symbol);
   });
 

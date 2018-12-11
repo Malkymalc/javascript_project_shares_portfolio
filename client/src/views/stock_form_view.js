@@ -18,11 +18,11 @@ StockFormView.prototype.render = function () {
   addStock.addEventListener('click', (event) => {
     console.log('clicked button', inputNo.value);
     const data = {
-      symbol: this.symbol;
-      amount: inputNo.value;
+      symbol: this.symbol,
+      amount: inputNo.value
     };
-    
-    PubSub.publish('StockFormView:add-stock', this.symbol );
+
+    PubSub.publish('StockFormView:add-stock', data);
   });
 };
 
