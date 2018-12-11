@@ -16,6 +16,14 @@ Stocks.prototype.bindEvents = function () {
       })
       .catch(console.error);
   });
+  PubSub.subscribe('StockFormView:share-delete'), (event) => {
+  console.log('here');
+    this.deleteOne(event.detail)
+    .then((stock) => {
+      PubSub.publish('Stock:stock-info-loaded', stock);
+    })
+    .catch(console.error);
+  }
 };
 
 
@@ -62,6 +70,12 @@ Stocks.prototype.findID = function (share) {
   const stock = this.portfolioData.filter(stock => stock.symbol === share.symbol);
   const shareID = stock[0]._id;
   return shareID;
+};
+
+Stocks.prototype.deleteOne = function (share) {
+  const deleteId = this.findID(share);
+  console.log(deleteId);
+  this.request.delete(id);
 };
 
 

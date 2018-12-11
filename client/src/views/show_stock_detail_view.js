@@ -15,9 +15,8 @@ ShowStockDetailView.prototype.bindEvents = function () {
 
 ShowStockDetailView.prototype.render = function (stock) {
   this.container.innerHTML = '';
-
-  // const stockFormView = new StockFormView(this.container, this.symbol);
-  // stockFormView.renderForm();
+  const stockFormView = new StockFormView(this.container, stock);
+  stockFormView.renderForm();
 
   const stockDetailView = new StockDetailView(this.container);
   stockDetailView.render(stock);
