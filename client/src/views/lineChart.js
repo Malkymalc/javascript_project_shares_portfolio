@@ -36,7 +36,7 @@ const LineChart = function(title, name, data, container) {
       max:  today, //Date.UTC(2018, 12, 0),
       allowDecimals: false,
       type           : 'datetime',
-      //tickInterval   : 24 * 3600 * 1000*31
+      
     }
   });
 
