@@ -1,3 +1,4 @@
+
 const ChartHelper = function(stocks) {
   const stockData = []; //empty array
   //loop over countries and push to data (symbol and open ) and pop. to array

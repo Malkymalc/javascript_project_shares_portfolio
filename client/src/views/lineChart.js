@@ -1,10 +1,16 @@
 const Highcharts = require('highcharts');
+require('highcharts/modules/exporting')(Highcharts);
 
 const LineChart = function(title, name, data, container) {
   const today = Date.now();
   const chart = new Highcharts.Chart({
     chart: {
       renderTo: container
+    },
+    navigator: {
+      series: {
+        includeInCSVExport: true
+      }
     },
     title: {
       text: title
@@ -36,10 +42,11 @@ const LineChart = function(title, name, data, container) {
       max:  today, //Date.UTC(2018, 12, 0),
       allowDecimals: false,
       type           : 'datetime',
-      
-    }
+
+    },
   });
 
 };
+
 
 module.exports = LineChart;
