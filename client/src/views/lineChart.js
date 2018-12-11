@@ -10,11 +10,6 @@ const LineChart = function(title, name, data, container) {
       text: title
     },
     series: [
-      // {
-      //   name: "stocks",
-      //   color: "#73b7ff",
-      //   data: [data]
-      // },
       {
         name: name,
         color: "#ffac33",
@@ -31,10 +26,16 @@ const LineChart = function(title, name, data, container) {
         label: {
           connectorAllowed: false
         },
-        pointStart: Date.UTC(2018, 12, 10),
-        pointInterval: 3
-
+        pointStart      : Date.UTC(2018, 0, 0),
+        pointInterval   : 24 * 3600 * 1000*30
       }
+    },
+    xAxis      : {
+      min:Date.UTC(2018, 0, 0),
+      max:Date.UTC(2018, 11, 1),
+      allowDecimals: false,
+      type           : 'datetime',
+      tickInterval   : 24 * 3600 * 1000*30
     }
   });
 
