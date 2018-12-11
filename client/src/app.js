@@ -7,9 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const stocksPortfolio = new Stocks('http://localhost:3000/api/portfolio/');
   stocksPortfolio.getPortfolioData();
   stocksPortfolio.getStocksForPortfolio();
+  stocksPortfolio.bindEvents();
 
-  const stocksShares = new Stocks('http://localhost:300/api/stocks/');
-  stocksShares.bindEvents();
+  // const stocksShares = new Stocks('http://localhost:300/api/stocks/');
+  // stocksPortfolio.bindEvents();
+  // stocksShares.bindEvents();
 
   const appContainer = document.querySelector('.app-container');
 

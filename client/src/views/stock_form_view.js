@@ -16,6 +16,7 @@ StockFormView.prototype.renderForm= function () {
 
   deleteBtn.addEventListener('click', (event) => {
     PubSub.publish('StockFormView:share-delete', this.stock );
+    console.log(this.stock);
   });
 
   this.container.appendChild(deleteBtn);

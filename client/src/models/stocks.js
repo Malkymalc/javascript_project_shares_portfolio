@@ -13,17 +13,15 @@ Stocks.prototype.bindEvents = function () {
     this.getMoreInfoOnStock(event.detail)
       .then((stock) => {
         PubSub.publish('Stock:stock-info-loaded', stock);
-      })
-      .catch(console.error);
+     })
+     .catch(console.error);
   });
-  PubSub.subscribe('StockFormView:share-delete'), (event) => {
-  console.log('here');
+
+  PubSub.subscribe('StockFormView:share-delete', (event) => {
     this.deleteOne(event.detail)
-    .then((stock) => {
-      PubSub.publish('Stock:stock-info-loaded', stock);
-    })
-    .catch(console.error);
-  }
+      PubSub.publish('Stock:stock-info-loaded');
+  });
+
 };
 
 
@@ -51,8 +49,18 @@ Stocks.prototype.getStocksForPortfolio = function () {
 
 
 Stocks.prototype.getMoreInfoOnStock = function (symbol) {
-  const request = new RequestHelper(`https://api.iextrading.com/1.0/stock/${symbol}/company`)
+  const request = new RequestHelper(`https://api.iextrading.com/1.0/stock/${symbol}/company`);
   return request.get();
+//  const newInfo = request.get();
+  // const request2 = this.portfolioData.filter(share => share.symbol === symbol);
+  // const amount = request2[0].amount;
+  // console.log(amount);
+  // const moreInfo = {
+  //   ...newInfo,
+  //   amount: request2[0].amount
+  // };
+  // console.log(moreInfo);
+  // return moreInfo;
 };
 
 Stocks.prototype.updatePortfolio = function () {
@@ -75,7 +83,7 @@ Stocks.prototype.findID = function (share) {
 Stocks.prototype.deleteOne = function (share) {
   const deleteId = this.findID(share);
   console.log(deleteId);
-  this.request.delete(id);
+  this.request.delete(deleteId);
 };
 
 
