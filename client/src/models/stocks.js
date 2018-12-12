@@ -20,10 +20,9 @@ Stocks.prototype.bindEvents = function () {
       })
       .catch(console.error);
     });
-
-    PubSub.subscribe('StockFormView:add-stock', (event) => {
-      const shareByID = this.findID(event.detail.symbol);
-      this.request.update(shareByID, event.detail.amount);
+    //subscribe to add share from formview
+    PubSub.subscribe('FormView:add-btn-clicked', (event) => {
+      this.addStock(event.detail);
     })
   };
 
@@ -75,5 +74,16 @@ Stocks.prototype.bindEvents = function () {
     return shareID;
   };
 
-
+  Stocks.prototype.addStock =  function(stock){
+    const stockAmount = stock.amount;
+    const shareByID = this.findID(stock.share); //Search for Object_id in DB and assign to var.
+    //variable for assigning new total after increase
+    const newAmount = stockAmount + stock.stockAmount;
+    stock.share.amount = newAmount;
+    this.request.update(shareByID, stock.share) //UPDATE
+    .then((stocks) => {
+      PubSub.publish('Stocks:portfolio-data-loaded', stocks)
+    })
+    .catch(console.error);
+  };
   module.exports = Stocks;

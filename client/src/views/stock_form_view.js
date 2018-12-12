@@ -1,28 +1,32 @@
 const PubSub = require('../helpers/pubsub.js');
 
-const StockFormView = function(container, symbol){
+const StockFormView = function(container, stock){
   this.container = container;
-  this.symbol = symbol;
+  this.stock = stock;
 
 };
 
-StockFormView.prototype.render = function () {
+StockFormView.prototype.render = function (stock) {
   const inputNo = document.createElement("input");
   inputNo.type = 'number';
   this.container.appendChild(inputNo);
+  this.renderAddButton(inputNo, stock);
+};
 
-  const addStock = document.createElement('button');
-  addStock.textContent = 'Add Stock';
-  this.container.appendChild(addStock);
+StockFormView.prototype.renderAddButton = function (inputNo, stock) {
+  const addStockBtn = document.createElement('button');
+  addStockBtn.textContent = 'Add Stock';
+  this.container.appendChild(addStockBtn);
 
-  addStock.addEventListener('click', (event) => {
-    console.log('clicked button', inputNo.value);
+  addStockBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    // console.log('clicked button', inputNo.value);
     const data = {
-      symbol: this.symbol,
-      amount: inputNo.value
+      stockAmount: inputNo.value,
+      share: stock
     };
-
-    PubSub.publish('StockFormView:add-stock', data);
+    console.log(data);
+    PubSub.publish('FormView:add-btn-clicked', data);
   });
 };
 
