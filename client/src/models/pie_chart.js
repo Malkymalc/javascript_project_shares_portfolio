@@ -9,6 +9,19 @@ const PieChart = function(title, data, container) {
     title: {
       text: title
     },
+     tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: false
+        },
+        showInLegend: true
+      }
+    },
     series: [
       {
         data: data
